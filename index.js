@@ -10,7 +10,7 @@ const questionRouter = require("./routes/questionroutes");
 const cors = require("cors");
 const apiRouter = require("./routes/apiroutes");
 
-mongoose.connect(process.env.connection_string).then(() => {
+mongoose.connect(process.env.MONGO_URI).then(() => {
   console.log('database is connected');
 }).catch((e) => {
   console.log("We got an error", e);
