@@ -18,7 +18,7 @@ mongoose.connect(process.env.connection_string).then(() => {
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.connection_string);
+    const conn = await mongoose.connect(process.env.MONGO_URI);
     console.log("MongoDB is connected", conn.connection.host);
   } catch (error) {
     console.log("We got an error", error);
