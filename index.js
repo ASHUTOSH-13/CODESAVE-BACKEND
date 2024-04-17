@@ -48,6 +48,11 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.send("Welcome to Codesave");
+}
+);
+
 // routes
 app.use("/questions", questionRouter);
 app.use("/api", apiRouter);
