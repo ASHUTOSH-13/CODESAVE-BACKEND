@@ -16,6 +16,17 @@ mongoose.connect(process.env.connection_string).then(() => {
   console.log("We got an error", e);
 })
 
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.connection_string);
+    console.log("MongoDB is connected", conn.connection.host);
+  } catch (error) {
+    console.log("We got an error", error);
+    process.exit(1);
+  }
+};
+
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -41,6 +52,10 @@ app.use(
 app.use("/questions", questionRouter);
 app.use("/api", apiRouter);
 
-app.listen(port, () => {
-  console.log(`Codesave is live on http://localhost:${port}`);
+connectDB().then(() => {
+  app.listen(port, () => {
+    console.log(`Codesave is live on http://localhost:${port}`);
+  });
 });
+
+
